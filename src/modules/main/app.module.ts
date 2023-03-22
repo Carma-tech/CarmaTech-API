@@ -1,14 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import { TypeDormModule } from '@nest-dynamodb/typedorm';
+import { DocumentClientV3 } from '@typedorm/document-client';
+import { DynamoDBClient, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 
-import { AppController } from '@app/modules/main/app.controller';
-import { AppService } from '@app/modules/main/app.service';
+import { AppController } from '@modules/main/app.controller';
+import { AppService } from '@modules/main/app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthModule } from '@app/modules/auth/auth.module';
-import { CommonModule } from '@app/modules/common/common.module';
+import { AuthModule } from '@modules/auth/auth.module';
+import { CommonModule } from '@modules/common/common.module';
 
 // TypeORM Entities
-import { User } from '@app/modules/user/user.entity';
+import { User } from '@modules/user/user.entity';
+
+// TypeDorm table
+import { ddbGlobalTable } from '@app/ddbTable';
 
 @Module({
   imports: [
@@ -27,6 +33,25 @@ import { User } from '@app/modules/user/user.entity';
           synchronize: configService.get('DB_SYNC') === 'true',
           keepConnectionAlive: true,
         } as TypeOrmModuleAsyncOptions;
+      },
+    }),
+    TypeDormModule.forRootAsync({
+      // need a different name here for dependency injection, @InjectTypeDorm(instanceName)
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      name: 'ddbInstance',
+      useFactory: async (configService: ConfigService) => {
+        return {
+          ddbGlobalTable,
+          entities: [],
+          documentClient: new DocumentClientV3(
+            new DynamoDBClient({
+              region: configService.get('AWS_REGION'),
+              endpoint: configService.get('AWS_DDB_ENDPOINT'),
+            }),
+          ),
+          name: 'ddbInstance',
+        };
       },
     }),
     ConfigModule.forRoot({

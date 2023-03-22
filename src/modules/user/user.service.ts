@@ -2,8 +2,8 @@ import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { User } from '@app/modules/user/user.entity';
-import { SignupDto } from '@app/modules/auth/dto/signup.dto';
+import { User } from './user.entity';
+import { SignupDto } from '@modules/auth/dto/signup.dto';
 
 @Injectable()
 export class UsersService {
@@ -38,5 +38,9 @@ export class UsersService {
     return await this.userRepository.save(
       this.userRepository.create(signupDto),
     );
+  }
+
+  async getUsersCount(): Promise<number> {
+    return await this.userRepository.count();
   }
 }
