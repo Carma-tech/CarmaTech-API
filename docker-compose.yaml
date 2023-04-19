@@ -8,9 +8,7 @@ services:
     container_name: nest
     ports:
       - 3000:3000
-    volumes:
-      - ./:/app/
-    command: sh -c "yarn migration:run && yarn start:dev"
+    command: sh -c "yarn db:upgrade && yarn start:dev"
     restart: unless-stopped
     depends_on:
       - db
