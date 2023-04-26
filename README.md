@@ -128,3 +128,18 @@ MIT
 ## Maintainers
 
 [crazyoptimist](https://crazyoptimist.net)
+
+## Run LocalStack
+
+#### In Linux or MacOS
+
+```bash
+
+.\scripts\create_table.sh
+```
+
+#### In Windows
+```bash
+
+.\scripts\create_table.bat
+```
