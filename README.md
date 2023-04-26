@@ -131,6 +131,7 @@ MIT
 
 ## Run LocalStack
 
+
 #### In Linux or MacOS
 
 ```bash
