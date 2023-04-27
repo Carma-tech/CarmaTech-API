@@ -129,5 +129,4 @@ MIT
 
 [crazyoptimist](https://crazyoptimist.net)
 
-## Run LocalStack
 
