@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1456.0/aws-sdk.min.js"></script>
+
+    <title>ChatGPT Translator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #0b0f1a;
+            color: #ffffff;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 10px;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 25px;
+            padding-left: 100px;
+            padding-right: 100px;
+            border-radius: 5px;
+        }
+
+        .form-section {
+            width: 50%;
+            margin: 0 20px;
+            background-color: #101928;
+            border-radius: 10px;
+            padding-top: 20px;
+            padding-bottom: 15px;
+        }
+
+        .form-section label {
+            display: block;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            padding-bottom: 10px;
+            padding-top: 20px;
+            font-weight: bold;
+        }
+
+        .form-section input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #374251;
+            border-radius: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            background-color: #1e2838;
+            margin-left: 15px;
+            color: white;
+        }
+
+        .input-field {
+            background-color: #1e2838;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group button {
+            width: 47%;
+            padding: 10px;
+            border: 1px solid #374251;
+            border-radius: 10px;
+            box-sizing: border-box;
+            color: white;
+            margin-left: 10px;
+            margin-right: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #ef600f;
+        }
+
+        .clear-btn {
+            background-color: #404a5a;
+        }
+
+        .response-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #374251;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            background-color: #303030;
+        }
+
+        .flag-btn {
+            width: 97%;
+            padding: 10px;
+            border: 1px solid #374251;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: #404a5a;
+            color: white;
+            font-weight: bold;
+            margin-left: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .clear-btn:hover {
+            background-color: #374251;
+        }
+
+        .submit-btn:hover {
+            background-color: #c44a03;
+        }
+
+        .flag-btn:hover {
+            background-color: #374251;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ChatGPT Translator</h1>
+    <p style="color: red; margin-left: 150px;">
+        When user clicks submit, us js technique to change it to the corresponding language. e.g: if input is English,
+        disply English in the "User Input label, and output will be Chinese, so display "Chinese in the Response label.
+    </p>
+    <div class="form-container">
+        <!-- User Input Form -->
+        <div class="form-section">
+            <div class="input-field">
+                <label>User Input</label>
+                <input type="text" class="user-input" id="userInput">
+            </div>
+            <div class="button-group">
+                <button class="clear-btn" onclick="clearInput()">Clear</button>
+                <button class="submit-btn"
+                    onclick="callLambdaFunction(document.getElementById('userInput').value)">Submit</button>
+            </div>
+        </div>
+
+        <!-- Response Form -->
+        <div class="form-section">
+            <div class="input-field">
+                <label>Response</label>
+                <input type="text" class="response-input" id="response" readonly>
+            </div>
+            <button class="flag-btn">Flag</button>
+        </div>
+    </div>
+
+    <script>
+        
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
