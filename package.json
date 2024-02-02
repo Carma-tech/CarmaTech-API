@@ -48,7 +48,7 @@
     "@smithy/smithy-client": "^2.1.18",
     "@typedorm/common": "^1.15.4",
     "@typedorm/core": "^1.15.4",
-    "@vendia/serverless-express": "^4.10.1",
+    "@vendia/serverless-express": "^4.12.6",
     "aws-sdk": "^2.1528.0",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
