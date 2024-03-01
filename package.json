@@ -31,7 +31,7 @@
     "@aws-lambda-powertools/logger": "^1.18.0",
     "@aws-sdk/client-cost-explorer": "^3.470.0",
     "@aws-sdk/client-dynamodb": "^3.438.0",
-    "@aws-sdk/client-lambda": "^3.504.0",
+    "@aws-sdk/client-lambda": "^3.525.0",
     "@aws-sdk/client-sns": "^3.484.0",
     "@aws-sdk/lib-dynamodb": "^3.484.0",
     "@aws-sdk/smithy-client": "^3.374.0",
