@@ -76,7 +76,7 @@
     "@types/aws-lambda": "^8.10.133",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.20",
-    "@types/jest": "^29.5.11",
+    "@types/jest": "^29.5.12",
     "@types/node": "^18.19.12",
     "@types/passport-jwt": "^3.0.12",
     "@types/source-map-support": "^0.5.10",
