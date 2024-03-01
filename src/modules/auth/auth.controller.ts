@@ -19,6 +19,7 @@ import { LambdaClient, InvokeCommand } from '@aws-sdk/client-lambda';
 import { Logger } from '@aws-lambda-powertools/logger';
 import { Lambda } from 'aws-sdk';
 import { ConfigService } from '@nestjs/config';
+import { RegisterRequestDto } from './dto/register.dto';
 
 @Controller('api/auth')
 @ApiTags('authentication')
@@ -35,7 +36,6 @@ export class AuthController {
       region: 'us-east-2',
     });
   }
-
 
   @Post('signin')
   @ApiResponse({ status: 201, description: 'Successful Login' })
@@ -108,6 +108,56 @@ export class AuthController {
       this.logger.error(`Error invoking CreateUserLambda: ${error.message}`);
       throw new ConflictException(`Failed to invoke CreateUserLambda: ${error.message}`);
     }
+  }
+
+  @Post('registerIncognitoUser')
+  @ApiResponse({ status: 201, description: 'Successful Registration' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async register(@Body() registerRequest: RegisterRequestDto): Promise<any> {
+    return await this.authService.registerIncognitoUser(registerRequest);
+  }
+
+  @Post('confirmIncognitoUser')
+  @ApiResponse({ status: 201, description: 'Successful Confirmation' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async confirm(@Body('email') email: string, @Body('confirmationCode') confirmationCode: string): Promise<any> {
+    return await this.authService.confirmIncognitoUser(email, confirmationCode);
+  }
+
+  @Post('resendConfirmationCode')
+  @ApiResponse({ status: 201, description: 'Successful Resend Confirmation' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async resendConfirmationCode(@Body() email: string): Promise<any> {
+    return await this.authService.resendConfirmationCode(email);
+  }
+
+  @Post('signinIncognitoUser')
+  @ApiResponse({ status: 200, description: 'Successful Authentication' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async signinIncognitoUser(@Body() authenticateRequest: SigninDto) {
+    return await this.authService.signinIncognitoUser(authenticateRequest);
+  }
+
+  @Post('forgotPassword')
+  @ApiResponse({ status: 201, description: 'Successful Password Reset' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async forgotPassword(@Body() email: string): Promise<any> {
+    return await this.authService.forgotPassword(email);
+  }
+
+  @Post('confirmForgotPassword')
+  @ApiResponse({ status: 201, description: 'Successful Password Reset' })
+  @ApiResponse({ status: 400, description: 'Bad Request' })
+  @ApiResponse({ status: 401, description: 'Unauthorized' })
+  async confirmForgotPassword(
+    @Body('email') email: string,
+    @Body('confirmationCode') confirmationCode: string,
+    @Body('password') password: string): Promise<any> {
+    return await this.authService.confirmForgotPassword(email, confirmationCode, password);
   }
 
   @ApiBearerAuth()
