@@ -46,7 +46,7 @@
     "@nestjs/platform-express": "^9.4.3",
     "@nestjs/swagger": "^6.3.0",
     "@nestjs/typeorm": "^9.0.1",
-    "@smithy/smithy-client": "^2.4.2",
+    "@smithy/smithy-client": "^2.5.0",
     "@typedorm/common": "^1.15.4",
     "@typedorm/core": "^1.15.4",
     "@vendia/serverless-express": "^4.12.6",
