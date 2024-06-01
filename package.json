@@ -50,7 +50,7 @@
     "@typedorm/common": "^1.15.4",
     "@typedorm/core": "^1.15.4",
     "@vendia/serverless-express": "^4.12.6",
-    "aws-sdk": "^2.1610.0",
+    "aws-sdk": "^2.1632.0",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
