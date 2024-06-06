@@ -1,14 +1,23 @@
-import { Get, Controller, HttpStatus, Res, Render } from '@nestjs/common';
+import { Get, Controller, HttpStatus, Res, Render, Post, Body, HttpException, Delete, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AppService } from '@modules/main/app.service';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
 import { join } from 'path';
+import { SSMClient, PutParameterCommand, ParameterType, DeleteParameterCommand } from "@aws-sdk/client-ssm";
 
 @Controller()
 @ApiTags('healthcheck')
 export class AppController {
-  constructor(private readonly appService: AppService, private readonly configService: ConfigService) { }
+  private ssmClient: SSMClient;
+  constructor(
+    private readonly appService: AppService,
+    private readonly configService: ConfigService
+  ) {
+    this.ssmClient = new SSMClient({
+      region: this.configService.get<string>('REGION')
+    });
+  }
 
   @Get()
   root() {
@@ -35,4 +44,5 @@ export class AppController {
       identityPoolId: this.configService.get('IDENTITY_POOL_ID')
     };
   }
+
 }
