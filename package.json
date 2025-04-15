@@ -58,7 +58,7 @@
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.1",
     "ejs": "^3.1.10",
-    "lint-staged": "^13.3.0",
+    "lint-staged": "^15.2.9",
     "luxon": "^3.4.4",
     "module-alias": "^2.2.3",
     "passport": "^0.6.0",
